@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ログインAPIテスト</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 8px 16px;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f5f5f5;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+<h1>ログインAPIテスト</h1>
+
+<form id="loginForm">
+    <input
+        type="text"
+        name="username"
+        placeholder="ユーザー名"
+        required
+    >
+
+    <input
+        type="password"
+        name="password"
+        placeholder="パスワード"
+        required
+    >
+
+    <button type="submit">送信</button>
+</form>
+
+<pre id="result">未送信</pre>
+
+<script>
+const form = document.getElementById("loginForm");
+const result = document.getElementById("result");
+
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    try {
+        const response = await fetch("login.php", {
+            method: "POST",
+            body: formData
+        });
+
+        const text = await response.text();
+
+        result.textContent =
+            `HTTP ${response.status}\n\n${text}`;
+    }
+    catch (err) {
+        result.textContent = err.toString();
+    }
+});
+</script>
+
+</body>
+</html>

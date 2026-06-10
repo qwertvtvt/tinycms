@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ユーザー登録テスト</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 500px;
+            margin: 50px auto;
+        }
+
+        input {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 8px 16px;
+        }
+
+        pre {
+            background: #f5f5f5;
+            padding: 10px;
+            margin-top: 20px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ユーザー登録テスト</h1>
+
+    <form id="registerForm">
+        <input
+            type="text"
+            name="username"
+            placeholder="ユーザー名"
+        >
+
+        <input
+            type="password"
+            name="password"
+            placeholder="パスワード"
+        >
+
+        <button type="submit">登録</button>
+    </form>
+
+    <h2>レスポンス</h2>
+    <pre id="result">未送信</pre>
+
+    <script>
+        const form = document.getElementById("registerForm");
+        const result = document.getElementById("result");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch("register.php", {
+                    method: "POST",
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                result.textContent =
+                    "HTTP " + response.status + "\n\n" +
+                    JSON.stringify(data, null, 4);
+
+            } catch (err) {
+                result.textContent = "エラー:\n" + err;
+            }
+        });
+    </script>
+
+</body>
+</html>
