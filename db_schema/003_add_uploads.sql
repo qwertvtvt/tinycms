@@ -1,4 +1,4 @@
 CREATE TABLE IF NOT EXISTS uploads (
-    filename VARCHAR(50) PRIMARY KEY,
-    newsid INTEGER
+    article_id VARCHAR(5),
+    filename VARCHAR(50) PRIMARY KEY
 )

@@ -1,6 +1,6 @@
 <?php
 
-$db = new SQLite3("./db/db.sqlite3");
+$db = new SQLite3("../db/db.sqlite3");
 
 header("Content-Type: application/json; charset=UTF-8");
 
