@@ -3,6 +3,9 @@
 $db = new SQLite3("../db/db.sqlite3");
 
 header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
 
 session_start();
 
@@ -28,6 +31,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
     $id = generateId(5);
     $title = htmlspecialchars($_POST["title"], ENT_QUOTES, "UTF-8");
     $content = htmlspecialchars($_POST["content"], ENT_QUOTES, "UTF-8");
+    $content = nl2br($content);
     $post_at = (int) floor(microtime(true)  * 1000);
     $images = [];
 
