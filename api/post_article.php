@@ -3,7 +3,8 @@
 $db = new SQLite3("../db/db.sqlite3");
 
 header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: http://localhost:5173");
+header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
@@ -23,7 +24,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
         http_response_code(400);
         echo json_encode([
             "success" => false,
-            "code" => 2
+            "code" => 3
         ]);
         exit();
     }
@@ -34,6 +35,15 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
     $content = nl2br($content);
     $post_at = (int) floor(microtime(true)  * 1000);
     $images = [];
+
+    if($title == "" || $content == "") {
+        http_response_code(400);
+        echo json_encode([
+            "success" => false,
+            "code" => 2
+        ]);
+        exit();
+    }
 
     if(!empty($_FILES)) {
         foreach ($_FILES['images']['tmp_name'] as $index => $tmpName) {
