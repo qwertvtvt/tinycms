@@ -1,33 +1,34 @@
-# TinyCMS バックエンド
+# TinyCMS
 
-Webサイトのお知らせ・ブログを管理するREST APIサーバーです。ユーザー認証、記事管理、画像アップロード機能を提供します。
+シンプルで軽量なコンテンツ管理システム。Webサイトのお知らせやブログを簡単に管理・更新できます。
 
-## セットアップ
+## 機能
 
-```bash
-# データベース初期化
-php db/db.php
+- **記事管理** - お知らせ・ブログ記事の作成、編集、削除
+- **画像アップロード** - 記事に複数の画像を添付
+- **ユーザー認証** - パスワード保護された管理画面
+- **レスポンシブデザイン** - PC・スマートフォン対応
+- **シンプル操作** - 技術知識がなくても使用可能
 
-# サーバー起動
-php -S localhost:3000
+## 仕様
+
+| 項目 | 詳細 |
+|------|------|
+| 対応ブラウザ | Chrome, Firefox, Safari, Edge (最新版) |
+| データベース | SQLite3 |
+| 画像形式 | JPEG, PNG, WebP |
+| 記事本文形式 | テキスト（改行対応） |
+
+## ファイル構成
+
+```
+tinycms/
+├── api/              REST API エンドポイント
+├── db/               データベース関連
+├── uploads/          アップロード画像保存先
+└── README.md         このファイル
 ```
 
-`http://localhost:3000/api/` でAPIが利用可能になります。
+## ライセンス
 
-## API エンドポイント
-
-- `POST /api/login.php` - ログイン
-- `POST /api/register.php` - 新規登録
-- `GET /api/get_articles.php` - 記事一覧取得
-- `POST /api/post_article.php` - 記事作成
-- `POST /api/edit_article.php` - 記事編集
-- `POST /api/delete_article.php` - 記事削除
-- `GET /api/me.php` - 現在のユーザー確認
-
-## 環境設定
-
-CORS設定で許可するドメインを変更してください（`api/` 内の各ファイル）：
-
-```php
-header("Access-Control-Allow-Origin: http://localhost:5173");
-```
+TinyCMS - コンテンツ管理システム
