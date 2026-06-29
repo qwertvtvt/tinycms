@@ -22,7 +22,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
 
-    if(trim($username) == "") {
+    if(trim($username) == "" || trim($password) == "") {
         http_response_code(400);
         echo json_encode([
             "success" => false,
